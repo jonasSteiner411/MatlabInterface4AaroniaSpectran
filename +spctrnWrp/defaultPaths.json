@@ -1,0 +1,26 @@
+{
+"dll":[
+{
+"libName":"spctrnWrp.dll",
+"location":"G:\\ihf\\27.04.2022\\MATLAB\\src\\spctrnWrp\\x64\\Release"
+},
+{
+"libName":"AaroniaRTSAAPI.dll",
+"location":"C:\\Program Files\\Aaronia AG\\Aaronia RTSA-Suite PRO"
+},
+{
+"libName":"spctrnWrpInterface.dll",
+"location":"G:\\ihf\\27.04.2022\\MATLAB\\src\\spctrnWrpInterface"
+}
+],
+"src":[
+{
+"libName":"dynamicConfig",
+"location":".\\src\\makeDynConf"
+},
+{
+"libName":"aaroniartsaapi.h",
+"location":"C:\\Program Files\\Aaronia AG\\Aaronia RTSA-Suite PRO\\sdk"
+}
+]
+}
