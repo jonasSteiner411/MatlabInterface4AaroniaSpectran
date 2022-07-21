@@ -4,22 +4,28 @@ classdef myGlobal
     end
     
     methods (Static)
+    
+        function pathName = getName()
+            tempResult = {what('spctrnWrp').path};
+            pathName = tempResult{end};
+        end
+    
         function set(variable, name)
-            if exist(fullfile(what('spctrnWrp').path, spctrnWrp.myGlobal.filename), 'file')
-                dat = load(fullfile(what('spctrnWrp').path, spctrnWrp.myGlobal.filename)).dat;
+            if exist(fullfile(spctrnWrp.myGlobal.getName(), spctrnWrp.myGlobal.filename), 'file')
+                dat = load(fullfile(spctrnWrp.myGlobal.getName(), spctrnWrp.myGlobal.filename)).dat;
             end
             if nargin == 1
                 name = inputname(1);
             end
             dat.(name) = variable;
-            save(fullfile(what('spctrnWrp').path, spctrnWrp.myGlobal.filename), 'dat');
+            save(fullfile(spctrnWrp.myGlobal.getName(), spctrnWrp.myGlobal.filename), 'dat');
         end
         
         function variable = get(variableName)
-            if ~exist(fullfile(what('spctrnWrp').path, spctrnWrp.myGlobal.filename), 'file')
-                error(['No such file :', fullfile(what('spctrnWrp').path, spctrnWrp.myGlobal.filename)]);
+            if ~exist(fullfile(spctrnWrp.myGlobal.getName(), spctrnWrp.myGlobal.filename), 'file')
+                error(['No such file :', fullfile(spctrnWrp.myGlobal.getName(), spctrnWrp.myGlobal.filename)]);
             end
-            dat = load(fullfile(what('spctrnWrp').path, spctrnWrp.myGlobal.filename)).dat;
+            dat = load(fullfile(spctrnWrp.myGlobal.getName(), spctrnWrp.myGlobal.filename)).dat;
             if nargin == 0
                 disp(dat);
                 return;
@@ -35,21 +41,20 @@ classdef myGlobal
         end
         
         function clear(variableName)
-            if ~exist(fullfile(what('spctrnWrp').path, spctrnWrp.myGlobal.filename), 'file')
-                error(['No such file :', fullfile(what('spctrnWrp').path, spctrnWrp.myGlobal.filename)]);
+            if ~exist(fullfile(spctrnWrp.myGlobal.getName(), spctrnWrp.myGlobal.filename), 'file')
+                error(['No such file :', fullfile(spctrnWrp.myGlobal.getName(), spctrnWrp.myGlobal.filename)]);
             end
             if ~(isstring(variableName) || ischar(variableName))
                 variableName = inputname(1);
             end
-            dat = load(fullfile(what('spctrnWrp').path, spctrnWrp.myGlobal.filename)).dat;
+            dat = load(fullfile(spctrnWrp.myGlobal.getName(), spctrnWrp.myGlobal.filename)).dat;
             if isequal(variableName, '-all')
                 warning("removing all globals.")
                 dat = [];
             elseif isfield(dat, variableName)
                 dat = rmfield(dat, variableName);
             end
-            save(fullfile(what('spctrnWrp').path, spctrnWrp.myGlobal.filename), 'dat');
+            save(fullfile(spctrnWrp.myGlobal.getName(), spctrnWrp.myGlobal.filename), 'dat');
         end
     end
 end
-
